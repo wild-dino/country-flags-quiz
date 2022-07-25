@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch} from "../../hooks/redux";
 import { useQuestions } from "../../hooks/useQuestion";
 import { fetchCountries } from "../../store/reducers/actionCreators";
 

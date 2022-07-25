@@ -1,10 +1,8 @@
-import React from 'react'
-import QuestionCard from './components/QuestionCard/QuestionCard'
+import React from "react";
+import StartingPage from "./pages/StartingPage";
 
 const App = () => {
-  return (
-    <QuestionCard/>
-  )
-}
+    return <StartingPage />;
+};
 
-export default App
+export default App;
