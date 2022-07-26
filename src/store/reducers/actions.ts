@@ -1,6 +1,7 @@
 import { ICountry } from '../../types/types';
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setGameStatus } from './gameSlice';
 
 const BASE_URL = "https://restcountries.com/v2/";
 const ALL_COUNTRIES = BASE_URL + "all";
@@ -18,3 +19,5 @@ export const fetchCountries = createAsyncThunk(
         }
     }
 );
+
+export {setGameStatus}

@@ -1,16 +1,19 @@
-import React, { FC } from 'react'
-import { useStatusGame } from '../../hooks/useStatusGame'
+import React, { FC } from "react";
+import { useActions } from "../../hooks/useActions";
 
-const Card:FC = () => {
-    let start = useStatusGame();
-    console.log(start);
+const Card: FC = () => {
+    const {setGameStatus} = useActions();
 
-  return (
-    <div>
-        <h1>Welcom to countries quizz game!</h1>
-        <button>Start</button>
-    </div>
-  )
-}
+    const handleClick = () => {
+        setGameStatus('quiz');
+    }
 
-export default Card
+    return (
+        <div>
+            <h1>Welcom to countries quizz game!</h1>
+            <button onClick={handleClick} >Start</button>
+        </div>
+    );
+};
+
+export default Card;

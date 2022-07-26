@@ -1,21 +1,26 @@
-import React, {FC, useEffect} from "react";
-import { useAppDispatch} from "../../hooks/redux";
+import React, {FC, useEffect, useState} from "react";
+import { useAppSelector } from "../../hooks/redux";
+import { useActions } from "../../hooks/useActions";
 import { useQuestions } from "../../hooks/useQuestion";
-import { fetchCountries } from "../../store/reducers/actions";
+import Question from "../Question/Question";
 
 const QuestionCard: FC = () => {
-    const dispatch = useAppDispatch(); 
-    const question = useQuestions(10);
+    const [currQuestion, setCurrentQuestion] = useState(0);
+    const {fetchCountries} = useActions();
+    const questions = useQuestions(10);
+    const isLoading = useAppSelector(state => state.countries.isLoading);
+    console.log(questions)
 
     useEffect(()=> {
-        dispatch(fetchCountries());
+        fetchCountries();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    console.log(question);
-
     return (
         <div>
+            <h1>
+            {isLoading? 'Создаем вопросы' : <Question question={questions[currQuestion]}  />  }   
+            </h1>
         </div>
     )
 };

@@ -4,8 +4,7 @@ interface GameState {
     gameStatus: string;
 }
 
-
-const initialState: GameState = {
+const initialState: GameState  = {
     gameStatus: 'start',
 }
 

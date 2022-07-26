@@ -1,8 +1,11 @@
 import React from 'react'
+import QuestionCard from '../components/QuestionCard/QuestionCard'
 
 const QuestionsPage = () => {
   return (
-    <div>QuestionsPage</div>
+    <div>
+        <QuestionCard/>
+    </div>
   )
 }
 

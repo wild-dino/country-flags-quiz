@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { IQuestion } from './../types/types';
 import { shuffleArray } from './../utils/shuffleArray';
 import { useAppSelector } from './redux';

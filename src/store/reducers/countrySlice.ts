@@ -10,7 +10,7 @@ interface CountryState {
 
 const initialState: CountryState = {
     countries: [],
-    isLoading: false,
+    isLoading: true,
     error: "",
 }
 
