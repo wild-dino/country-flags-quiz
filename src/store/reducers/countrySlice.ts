@@ -1,5 +1,5 @@
 import { ICountry } from './../../types/types';
-import { fetchCountries } from './actionCreators';
+import { fetchCountries } from './actions';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface CountryState {

@@ -1,4 +1,4 @@
-import { ICountry } from './../../types/types';
+import { ICountry } from '../../types/types';
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
