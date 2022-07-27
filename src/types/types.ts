@@ -8,5 +8,5 @@ export interface ICountry {
 export interface IQuestion {
     flag: string;
     correctAnswer: string;
-    incorrectAnswer: ICountry[];
+    incorrectAnswer?: ICountry[];
 }

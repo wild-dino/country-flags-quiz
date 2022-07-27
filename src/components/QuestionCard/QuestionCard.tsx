@@ -6,20 +6,19 @@ import Question from "../Question/Question";
 
 const QuestionCard: FC = () => {
     const [currQuestion, setCurrentQuestion] = useState(0);
-    const {fetchCountries} = useActions();
+    
     const questions = useQuestions(10);
     const isLoading = useAppSelector(state => state.countries.isLoading);
-    console.log(questions)
 
-    useEffect(()=> {
-        fetchCountries();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+
+    if(isLoading) {
+        return  <h1>'Создаем вопросы'</h1>
+    }
 
     return (
         <div>
             <h1>
-            {isLoading? 'Создаем вопросы' : <Question question={questions[currQuestion]}  />  }   
+                ofdk
             </h1>
         </div>
     )
