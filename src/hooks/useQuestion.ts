@@ -5,7 +5,8 @@ import { useAppSelector } from "./redux";
 export const useQuestions = (number: number) => {
     const countries = useAppSelector((state) => state.countries.countries);
     const answers: string[][] = [];
-    const questions: IQuestion[] = countries.map(function(country) {
+    
+    const questions: IQuestion[] = countries.map(function (country) {
         return {
             flag: country.flag,
             correctAnswer: country.name,
@@ -17,16 +18,20 @@ export const useQuestions = (number: number) => {
 
     shuffleArray(questions);
 
-    questions.map((elem) =>
+    questions.forEach((elem) => {
         answers.push(elem.incorrectAnswer!.map((country) => country.name))
-    );
-    questions.forEach((item) => delete item.incorrectAnswer);
+        delete elem.incorrectAnswer
+    });
 
-    questions.length = number;
-    answers.map((answers) => shuffleArray(answers));
-    answers.map((randomAnswers) => (randomAnswers.length = 3));
+    answers.forEach((answer, index) => {
+        shuffleArray(answer);
+        answer.push(questions[index].correctAnswer)
+        answer.length = 3;
+        answer.push(questions[index].correctAnswer)
+    });
+
     answers.length = number;
-    answers.map((answer, index) => answer.push(questions[index].correctAnswer));
+    questions.length = number;
     console.log(questions, answers);
 
     return { questions, answers };

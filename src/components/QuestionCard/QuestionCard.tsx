@@ -9,7 +9,7 @@ const QuestionCard: FC = () => {
     
     const questions = useQuestions(10);
     const isLoading = useAppSelector(state => state.countries.isLoading);
-
+    
 
     if(isLoading) {
         return  <h1>'Создаем вопросы'</h1>
