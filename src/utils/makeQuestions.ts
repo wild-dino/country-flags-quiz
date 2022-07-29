@@ -1,11 +1,9 @@
-import { IQuestion } from "./../types/types";
-import { shuffleArray } from "./../utils/shuffleArray";
-import { useAppSelector } from "./redux";
+import { ICountry } from '../types/types';
+import { IQuestion} from "../types/types";
+import { shuffleArray } from "./shuffleArray";
 
-export const useQuestions = (number: number) => {
-    const countries = useAppSelector((state) => state.countries.countries);
+export const makeQuestions = (number: number, countries: ICountry[]) => {
     const answers: string[][] = [];
-    
     const questions: IQuestion[] = countries.map(function (country) {
         return {
             flag: country.flag,
@@ -17,22 +15,22 @@ export const useQuestions = (number: number) => {
     });
 
     shuffleArray(questions);
-
     questions.forEach((elem) => {
-        answers.push(elem.incorrectAnswer!.map((country) => country.name))
-        delete elem.incorrectAnswer
+        answers.push(elem.incorrectAnswer!.map((country) => country.name));
+        delete elem.incorrectAnswer;
     });
 
     answers.forEach((answer, index) => {
         shuffleArray(answer);
-        answer.push(questions[index].correctAnswer)
+        answer.push(questions[index].correctAnswer);
         answer.length = 3;
-        answer.push(questions[index].correctAnswer)
+        answer.push(questions[index].correctAnswer);
     });
+    answers.map((answer) => shuffleArray(answer));
+    questions.map((question, index) => question.answers = answers[index])
 
     answers.length = number;
     questions.length = number;
-    console.log(questions, answers);
 
-    return { questions, answers };
+    return questions;
 };

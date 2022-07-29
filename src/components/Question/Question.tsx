@@ -1,19 +1,25 @@
-import React, { FC } from 'react';
-import {IQuestion} from './../../types/types'
+import React, { FC } from "react";
+import { IQuestion } from "./../../types/types";
 
 interface QuestionProps {
-    randomAnswers: string[];
+    correctAnswer: string;
+    flag: string;
+    answers: string[];
+    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Question: FC<QuestionProps> = ({randomAnswers}) => {
+const Question: FC<QuestionProps> = ({ flag, answers, onClick }) => {
+    return (
+        <div>
+            <h1>say the name of the country</h1>
+            <img src={flag} alt="flag"></img>
+            {answers.map((answer) => (
+                <button onClick={onClick} key={answer} value={answer}>
+                    {answer}
+                </button>
+            ))}
+        </div>
+    );
+};
 
-    console.log(randomAnswers)
-
-  return (
-    <div>
-        
-    </div>
-  )
-}
-
-export default Question
+export default Question;

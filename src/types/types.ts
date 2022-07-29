@@ -9,4 +9,5 @@ export interface IQuestion {
     flag: string;
     correctAnswer: string;
     incorrectAnswer?: ICountry[];
+    answers?: string[];
 }
