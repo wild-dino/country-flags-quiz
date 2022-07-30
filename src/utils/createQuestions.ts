@@ -2,7 +2,7 @@ import { ICountry } from '../types/types';
 import { IQuestion} from "../types/types";
 import { shuffleArray } from "./shuffleArray";
 
-export const makeQuestions = (number: number, countries: ICountry[]) => {
+export const createQuestions = (number: number, countries: ICountry[]) => {
     const answers: string[][] = [];
     const questions: IQuestion[] = countries.map(function (country) {
         return {
@@ -22,10 +22,10 @@ export const makeQuestions = (number: number, countries: ICountry[]) => {
 
     answers.forEach((answer, index) => {
         shuffleArray(answer);
-        answer.push(questions[index].correctAnswer);
         answer.length = 3;
         answer.push(questions[index].correctAnswer);
     });
+    
     answers.map((answer) => shuffleArray(answer));
     questions.map((question, index) => question.answers = answers[index])
 

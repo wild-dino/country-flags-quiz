@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import { makeQuestions } from "../utils/makeQuestions";
+import { createQuestions } from "../utils/createQuestions";
 import { useAppSelector } from "./redux";
 
 export const useQuestions = (number: number) => {
     const countries = useAppSelector((state) => state.countries.countries);
 
     const shuffledQuestions = useMemo(() => {
-        return makeQuestions(number, countries);
+        return createQuestions(number, countries);
     }, [number, countries]);
 
     return shuffledQuestions;

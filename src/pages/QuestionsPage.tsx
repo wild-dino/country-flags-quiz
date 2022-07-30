@@ -1,13 +1,12 @@
-import React from 'react'
-import QuestionCard from '../components/QuestionCard/QuestionCard'
-import { IQuestion } from '../types/types'
+import React from "react";
+import QuestionsList from "../components/QuestionsList/QuestionsList";
 
 const QuestionsPage = () => {
-  return (
-    <div>
-        <QuestionCard />
-    </div>
-  )
-}
+    return (
+        <div>
+            <QuestionsList />
+        </div>
+    );
+};
 
-export default QuestionsPage
+export default QuestionsPage;
