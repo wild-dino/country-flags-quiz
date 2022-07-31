@@ -6,6 +6,7 @@ export interface ICountry {
 }
 
 export interface IQuestion {
+    id: number;
     flag: string;
     correctAnswer: string;
     incorrectAnswer?: ICountry[];

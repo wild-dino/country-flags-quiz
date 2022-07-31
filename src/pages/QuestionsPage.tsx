@@ -1,10 +1,10 @@
 import React from "react";
-import QuestionsList from "../components/QuestionsList/QuestionsList";
+import Question from "../components/Question";
 
 const QuestionsPage = () => {
     return (
         <div>
-            <QuestionsList />
+            <Question />
         </div>
     );
 };
