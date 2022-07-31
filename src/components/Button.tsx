@@ -3,12 +3,13 @@ import React, { FC } from 'react'
 
 interface ButtonProps {
     answer: string;
-    correctAnswer: string;
     id: number;
     handleClick: (answer: string) => void
 }
 
-const Button: FC<ButtonProps> = ({ answer, correctAnswer, id, handleClick }) => {
+const Button: FC<ButtonProps> = ({ answer, id, handleClick }) => {
+
+    console.log('render')
 
     const handleAnswer = () => {
         handleClick(answer);
