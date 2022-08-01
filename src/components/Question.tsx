@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../hooks/redux";
-import { useActions } from "../hooks/useActions";
-import { useQuestions } from "../hooks/useQuestions";
+import { useAppSelector } from "@/hooks/redux";
+import { useActions } from "@/hooks/useActions";
+import { useQuestions } from "@/hooks/useQuestions";
 import Button from "./Button";
 
 const Question: FC = () => {
@@ -34,7 +34,7 @@ const Question: FC = () => {
         <StyledQuestion>
             <StyledBackImg src={questions[questionNumber].flag} />
             {questions[questionNumber].answers?.map(
-                (answer, id): JSX.Element => (
+                (answer: string, id: number): JSX.Element => (
                     <Button
                         key={id}
                         handleClick={handleClick}

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useAppSelector } from "./hooks/redux";
-import { useActions } from "./hooks/useActions";
+import { useAppSelector } from "@/hooks/redux";
+import { useActions } from "@/hooks/useActions";
 import EndScreen from "./pages/EndScreen";
 import QuestionsPage from "./pages/QuestionsPage";
 import StartingPage from "./pages/StartingPage";
+import GlobalStyle from "@/styles/globalStyle";
 
 const App = () => {
     const status = useAppSelector(state => state.game.gameStatus);
@@ -16,6 +17,7 @@ const App = () => {
 
     return (
         <>
+        <GlobalStyle />
         {status === 'start' &&  <StartingPage />}
         {status === 'quiz' && <QuestionsPage />}
         {status === 'end' && <EndScreen/>}

@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { useActions } from "../hooks/useActions";
+import React, { FC} from "react";
+import { useActions } from "@/hooks/useActions";
 
 const Card: FC = () => {
     const {setGameStatus} = useActions();
