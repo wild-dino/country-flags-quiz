@@ -9,7 +9,7 @@ const Question: FC = () => {
     const questions = useQuestions(10);
     const { updateQuiz, setGameStatus } = useActions();
     const isLoading = useAppSelector((state) => state.countries.isLoading);
-    let { questionNumber, score } = useAppSelector((state) => state.game);
+    let { questionNumber, score, correctAnswer } = useAppSelector((state) => state.game);
 
     console.log(questions);
 
@@ -44,6 +44,7 @@ const Question: FC = () => {
                             handleClick={handleClick}
                             answer={answer}
                             isLoading={isLoading}
+                            correctAnswer={questions[questionNumber!].correctAnswer}
                         />
                     )
                 )}
@@ -67,6 +68,7 @@ const StyledQuestion = styled.div`
 `;
 
 const StyledScoreBoard = styled.div`
+
     grid-area: score;
     align-self: center;
 `;
