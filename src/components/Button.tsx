@@ -3,12 +3,15 @@ import React, { FC } from 'react'
 
 interface ButtonProps {
     answer: string;
-    handleClick: (answer: string) => void
+    handleClick: (answer: string) => void;
+    isLoading: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ answer, handleClick }) => {
+const Button: FC<ButtonProps> = ({ answer, handleClick, isLoading }) => {
 
-    console.log('render')
+    if(isLoading) {
+        return <></>
+    }
 
     const handleAnswer = () => {
         handleClick(answer);

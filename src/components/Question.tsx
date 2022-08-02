@@ -32,16 +32,22 @@ const Question: FC = () => {
 
     return (
         <StyledQuestion>
-            <StyledBackImg src={questions[questionNumber].flag} />
-            {questions[questionNumber].answers?.map(
-                (answer: string, id: number): JSX.Element => (
-                    <Button
-                        key={id}
-                        handleClick={handleClick}
-                        answer={answer}
-                    />
-                )
-            )}
+            <StyledScoreBoard>{score}</StyledScoreBoard>
+            <ImgWrapper>
+                <StyledImg src={questions[questionNumber].flag} />
+            </ImgWrapper>
+            <StyledRowButton>
+                {questions[questionNumber].answers?.map(
+                    (answer: string, id: number): JSX.Element => (
+                        <Button
+                            key={id}
+                            handleClick={handleClick}
+                            answer={answer}
+                            isLoading={isLoading}
+                        />
+                    )
+                )}
+            </StyledRowButton>
         </StyledQuestion>
     );
 };
@@ -49,15 +55,44 @@ const Question: FC = () => {
 export default Question;
 
 const StyledQuestion = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    min-width: 30vw;
+    max-height: 100vh;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: repeat(1fr 3fr 2fr);
+    grid-template-areas:
+        "score"
+        "flag"
+        "buttonRow";
 `;
 
-const StyledBackImg = styled.img`
-    width: 50%;
+const StyledScoreBoard = styled.div`
+    grid-area: score;
+    align-self: center;
+`;
+
+const ImgWrapper = styled.div`
+    grid-area: flag;
+    align-self: center;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 90%;
+    height: 0;
+    position: relative;
+`;
+
+const StyledImg = styled.img`
+    width: 100%;
     height: 100%;
-    background-image: url(${(props) => props.src}) no-repeat center;
-    background-size: cover;
+    position: absolute;
+    object-fit: contain;
+`;
+
+const StyledRowButton = styled.div`
+    align-self: center;
+    grid-area: buttonRow;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 25px;
 `;

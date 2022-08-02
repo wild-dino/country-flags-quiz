@@ -1,28 +1,23 @@
 import React, { useEffect } from "react";
-import { useAppSelector } from "@/hooks/redux";
 import { useActions } from "@/hooks/useActions";
-import EndScreen from "./pages/EndScreen";
-import QuestionsPage from "./pages/QuestionsPage";
-import StartingPage from "./pages/StartingPage";
 import GlobalStyle from "@/styles/globalStyle";
+import Layout from "@/components/Layout";
+import Dashboard from "@/components/Dashboard";
 
 const App = () => {
-    const status = useAppSelector(state => state.game.gameStatus);
-    const {fetchCountries} = useActions();
-    
+    const { fetchCountries } = useActions();
+
     useEffect(() => {
         fetchCountries();
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <>
-        <GlobalStyle />
-        {status === 'start' &&  <StartingPage />}
-        {status === 'quiz' && <QuestionsPage />}
-        {status === 'end' && <EndScreen/>}
-        </>
-    ) 
+        <Layout>
+            <GlobalStyle />
+            <Dashboard/>
+        </Layout>
+    );
 };
 
 export default App;
