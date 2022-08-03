@@ -5,47 +5,50 @@ import { useActions } from "@/hooks/useActions";
 import { useQuestions } from "@/hooks/useQuestions";
 import Button from "./Button";
 import Confetti from "./Confetti";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 
 const initialState = {
     isCorrect: false,
-    hasAnswered: false
-}
+    hasAnswered: false,
+};
 
 const Question: FC = () => {
     const questions = useQuestions(10);
     const { updateQuiz, setGameStatus } = useActions();
     const isLoading = useAppSelector((state) => state.countries.isLoading);
-    let {score} = useAppSelector((state) => state.game);
+    let { score } = useAppSelector((state) => state.game);
     const [currQuestion, setCurrQuestion] = useState(0);
-    const [{isCorrect, hasAnswered}, setState] = useState(initialState);
+    const [{ isCorrect, hasAnswered }, setState] = useState(initialState);
 
     console.log(questions);
 
     const clearState = () => {
-        setState({...initialState});
+        setState({ ...initialState });
     };
 
     const handleClick = (answer: string, hasAnswered: boolean): void => {
         if (!hasAnswered) {
-            currQuestion === 9
-            ? setGameStatus("end")
-            : updateQuiz({
-                  hasAnswered: true,
-                  correctAnswer: questions[currQuestion].correctAnswer,
-                  isCorrect:
-                      answer === questions[currQuestion].correctAnswer
-                          ? true
-                          : false,
-              });
-            setState({...initialState, isCorrect: questions[currQuestion].correctAnswer === answer, hasAnswered: hasAnswered});
+            updateQuiz({
+                hasAnswered: true,
+                correctAnswer: questions[currQuestion].correctAnswer,
+                isCorrect:
+                    answer === questions[currQuestion].correctAnswer
+                        ? true
+                        : false,
+            });
+            setState({
+                ...initialState,
+                isCorrect: questions[currQuestion].correctAnswer === answer,
+                hasAnswered: true,
+            });
         }
     };
 
-    const handleNext = () : void => {
-        setCurrQuestion(prevQuestion => prevQuestion + 1);
+    const handleNext = (): void => {
+        setCurrQuestion((prevQuestion) => prevQuestion + 1);
+        currQuestion === 9 && setGameStatus("end");
         clearState();
-    }
+    };
 
     if (isLoading) {
         return <h1>Creating questions... ^_^</h1>;
@@ -53,12 +56,20 @@ const Question: FC = () => {
 
     return (
         <StyledQuestion>
-            <StyledScoreBoard>{score}</StyledScoreBoard>
+            <StyledBoardInfo>
+                <Score>Your score: {score}</Score>
+                <QuestionNum>question: {currQuestion + 1}/10</QuestionNum>
+            </StyledBoardInfo>
             <ImgWrapper>
                 <StyledImg src={questions[currQuestion].flag} />
             </ImgWrapper>
-            <Modal handleNext={handleNext} isCorrect={isCorrect} correctAnswer={questions[currQuestion].correctAnswer} />
-            <Confetti isCorrect={isCorrect}  />
+            <Modal
+                handleNext={handleNext}
+                isCorrect={isCorrect}
+                hasAnswered={hasAnswered}
+                correctAnswer={questions[currQuestion].correctAnswer}
+            />
+            <Confetti isCorrect={isCorrect} />
             <StyledRowButton>
                 {questions[currQuestion].answers?.map(
                     (answer: string, id: number): JSX.Element => (
@@ -73,7 +84,6 @@ const Question: FC = () => {
                         />
                     )
                 )}
-                <button onClick={handleNext}>Next question</button>
             </StyledRowButton>
         </StyledQuestion>
     );
@@ -82,10 +92,10 @@ const Question: FC = () => {
 export default Question;
 
 const StyledQuestion = styled.div`
-    min-width: 30vw;
+    min-width: 10vw;
     max-height: 100vh;
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 20px;
     grid-template-rows: repeat(1fr 3fr 2fr);
     grid-template-areas:
         "score"
@@ -93,10 +103,18 @@ const StyledQuestion = styled.div`
         "buttonRow";
 `;
 
-const StyledScoreBoard = styled.div`
+const StyledBoardInfo = styled.div`
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
     grid-area: score;
     align-self: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
 `;
+
+const Score = styled.div``;
+const QuestionNum = styled.div``;
 
 const ImgWrapper = styled.div`
     grid-area: flag;
@@ -104,7 +122,7 @@ const ImgWrapper = styled.div`
     display: inline-block;
     overflow: hidden;
     width: 100%;
-    padding-bottom: 80%;
+    padding-bottom: 70%;
     height: 0;
     position: relative;
 `;
@@ -117,9 +135,11 @@ const StyledImg = styled.img`
 `;
 
 const StyledRowButton = styled.div`
-    align-self: center;
-    grid-area: buttonRow;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 25px;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    max-width: 50vw;
+    align-self: center;
+    margin: 0 auto;
+    grid-area: buttonRow;
 `;

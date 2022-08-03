@@ -15,7 +15,7 @@ const Confetti: FC<ConfettiProps> = ({isCorrect}) => {
     const { width, height }: WindowDimensions = useWindowSize();
 
   return (
-    isCorrect? <ReactConfetti width={width} height={height}/> : null
+    isCorrect ? (<ReactConfetti width={width} height={height}  gravity={0.5}/> ) : null
   )
 }
 

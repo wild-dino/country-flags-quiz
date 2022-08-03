@@ -37,7 +37,7 @@ const Button: FC<ButtonProps> = ({ answer, handleClick, correctAnswer, hasAnswer
             setState({ active: true, answered: true});
             setTimeout(() => {
                 handleClick(answer, answered);
-            }, 1000);
+            }, 300);
         }
     };
 
@@ -66,7 +66,6 @@ const StyledButton = styled.button<StyledButonProps>`
     min-height: 40px;
     position: relative;
     z-index: 1;
-    min-width: 200px;
     cursor: pointer;
     transition: 0.1s all ease-in-out;
     font-weight: bold;
