@@ -5,6 +5,7 @@ import { useActions } from "@/hooks/useActions";
 import { useQuestions } from "@/hooks/useQuestions";
 import Button from "./Button";
 import Confetti from "./Confetti";
+import { Modal } from "./Modal";
 
 const initialState = {
     isCorrect: false,
@@ -56,6 +57,7 @@ const Question: FC = () => {
             <ImgWrapper>
                 <StyledImg src={questions[currQuestion].flag} />
             </ImgWrapper>
+            <Modal handleNext={handleNext} isCorrect={isCorrect} correctAnswer={questions[currQuestion].correctAnswer} />
             <Confetti isCorrect={isCorrect}  />
             <StyledRowButton>
                 {questions[currQuestion].answers?.map(
