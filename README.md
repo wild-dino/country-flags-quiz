@@ -1,4 +1,4 @@
-The quiz built with country REST countries: https://restcountries.com/
+The quiz built with REST API countries: https://restcountries.com/
 
 ## Technologies:
 - React + React Hooks
