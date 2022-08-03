@@ -1,10 +1,6 @@
+import { LayoutProps } from '@/types/types';
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
-
-interface LayoutProps {
-    children: JSX.Element | JSX.Element[];
-}
 
 const Layout: FC<LayoutProps> = ({children}) : JSX.Element => {
   return (

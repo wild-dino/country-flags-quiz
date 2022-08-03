@@ -1,11 +1,11 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import { useAppSelector } from "@/hooks/redux";
 import { useActions } from "@/hooks/useActions";
 import { useQuestions } from "@/hooks/useQuestions";
-import Button from "./Button";
 import Confetti from "./Confetti";
 import Modal from "./Modal";
+import AnswerButton from "./Buttons/AnswerButton";
 
 const initialState = {
     isCorrect: false,
@@ -14,13 +14,13 @@ const initialState = {
 
 const Question: FC = () => {
     const questions = useQuestions(10);
-    const { updateQuiz, setGameStatus } = useActions();
+    const { updateQuiz, setQuizStatus } = useActions();
+
     const isLoading = useAppSelector((state) => state.countries.isLoading);
     let { score } = useAppSelector((state) => state.game);
+
     const [currQuestion, setCurrQuestion] = useState(0);
     const [{ isCorrect, hasAnswered }, setState] = useState(initialState);
-
-    console.log(questions);
 
     const clearState = () => {
         setState({ ...initialState });
@@ -29,8 +29,6 @@ const Question: FC = () => {
     const handleClick = (answer: string, hasAnswered: boolean): void => {
         if (!hasAnswered) {
             updateQuiz({
-                hasAnswered: true,
-                correctAnswer: questions[currQuestion].correctAnswer,
                 isCorrect:
                     answer === questions[currQuestion].correctAnswer
                         ? true
@@ -46,7 +44,7 @@ const Question: FC = () => {
 
     const handleNext = (): void => {
         setCurrQuestion((prevQuestion) => prevQuestion + 1);
-        currQuestion === 9 && setGameStatus("end");
+        currQuestion === 9 && setQuizStatus("end");
         clearState();
     };
 
@@ -73,14 +71,13 @@ const Question: FC = () => {
             <StyledRowButton>
                 {questions[currQuestion].answers?.map(
                     (answer: string, id: number): JSX.Element => (
-                        <Button
+                        <AnswerButton
                             key={id}
                             handleClick={handleClick}
                             answer={answer}
                             correctAnswer={
                                 questions[currQuestion].correctAnswer
                             }
-                            hasAnswered={hasAnswered}
                         />
                     )
                 )}
@@ -113,8 +110,14 @@ const StyledBoardInfo = styled.div`
     flex-wrap: wrap;
 `;
 
-const Score = styled.div``;
-const QuestionNum = styled.div``;
+const Score = styled.div`
+    font-size: 18px;
+    font-weight: bold;
+`;
+const QuestionNum = styled.div`
+    font-size: 18px;
+    font-weight: bold;
+`;
 
 const ImgWrapper = styled.div`
     grid-area: flag;

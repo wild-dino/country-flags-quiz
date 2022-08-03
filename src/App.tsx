@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import Dashboard from "@/components/Dashboard";
 
 const App = () => {
-    const { fetchCountries } = useActions();
+    const {fetchCountries} = useActions();
 
     useEffect(() => {
         fetchCountries();

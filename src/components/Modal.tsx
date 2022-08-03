@@ -1,13 +1,9 @@
-import { FC } from "react";
 import { animated, config, useSpring } from "react-spring";
 import styled from "styled-components";
+import { FC } from "react";
+import { ModalProps } from "@/types/types";
 
-interface ModalProps {
-    correctAnswer: string;
-    isCorrect: boolean;
-    hasAnswered: boolean;
-    handleNext: () => void;
-}
+import Button from "./Buttons/Button";
 
 const Modal: FC<ModalProps> = ({
     correctAnswer,
@@ -35,7 +31,7 @@ const Modal: FC<ModalProps> = ({
                             ? "Great!!"
                             : `The answer is ${correctAnswer}!`}
                     </Answer>
-                    <button onClick={handleNext}>Next country</button>
+                    <Button onClick={handleNext}>Next country</Button>
                 </StyledModal>
             </Centered>
         </Background>
@@ -52,7 +48,7 @@ const Background = styled.div`
     top: 50%;
     left: 50%;
     background-color: rgba(0, 0, 0, 0.7);
-    transform: translate(-50%, -50%);    
+    transform: translate(-50%, -50%);
 `;
 
 const Centered = styled.div`
@@ -67,7 +63,7 @@ const StyledModal = styled(animated.div)`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 1rem 2rem;
+    padding: 2rem 2rem;
     border-radius: 15px;
     opacity: 0.9;
     z-index: 3;
@@ -79,7 +75,7 @@ const Answer = styled.div`
     color: #150632;
     font-weight: bold;
     margin: 10%;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     width: 60%;
     minwidth: 200px;
 `;
