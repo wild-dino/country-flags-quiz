@@ -21,7 +21,6 @@ export default createGlobalStyle`
   html, body {
     font-size: 100%;
     margin: 0;
-    background: #090d2e;
     color: white;
     font-family: 'Montserrat';
   }

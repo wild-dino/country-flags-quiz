@@ -1,30 +1,50 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useAppSelector } from "@/hooks/redux";
 import { useActions } from "@/hooks/useActions";
 import { useQuestions } from "@/hooks/useQuestions";
 import Button from "./Button";
+import Confetti from "./Confetti";
+
+const initialState = {
+    isCorrect: false,
+    hasAnswered: false
+}
 
 const Question: FC = () => {
     const questions = useQuestions(10);
     const { updateQuiz, setGameStatus } = useActions();
     const isLoading = useAppSelector((state) => state.countries.isLoading);
-    let { questionNumber, score, correctAnswer } = useAppSelector((state) => state.game);
+    let {score} = useAppSelector((state) => state.game);
+    const [currQuestion, setCurrQuestion] = useState(0);
+    const [{isCorrect, hasAnswered}, setState] = useState(initialState);
 
     console.log(questions);
 
-    const handleClick = (answer: string): void => {
-        questionNumber === 9
+    const clearState = () => {
+        setState({...initialState});
+    };
+
+    const handleClick = (answer: string, hasAnswered: boolean): void => {
+        if (!hasAnswered) {
+            currQuestion === 9
             ? setGameStatus("end")
             : updateQuiz({
                   hasAnswered: true,
-                  correctAnswer: questions[questionNumber!].correctAnswer,
+                  correctAnswer: questions[currQuestion].correctAnswer,
                   isCorrect:
-                      answer === questions[questionNumber!].correctAnswer
+                      answer === questions[currQuestion].correctAnswer
                           ? true
                           : false,
               });
+            setState({...initialState, isCorrect: questions[currQuestion].correctAnswer === answer, hasAnswered: hasAnswered});
+        }
     };
+
+    const handleNext = () : void => {
+        setCurrQuestion(prevQuestion => prevQuestion + 1);
+        clearState();
+    }
 
     if (isLoading) {
         return <h1>Creating questions... ^_^</h1>;
@@ -34,20 +54,24 @@ const Question: FC = () => {
         <StyledQuestion>
             <StyledScoreBoard>{score}</StyledScoreBoard>
             <ImgWrapper>
-                <StyledImg src={questions[questionNumber].flag} />
+                <StyledImg src={questions[currQuestion].flag} />
             </ImgWrapper>
+            <Confetti isCorrect={isCorrect}  />
             <StyledRowButton>
-                {questions[questionNumber].answers?.map(
+                {questions[currQuestion].answers?.map(
                     (answer: string, id: number): JSX.Element => (
                         <Button
                             key={id}
                             handleClick={handleClick}
                             answer={answer}
-                            isLoading={isLoading}
-                            correctAnswer={questions[questionNumber!].correctAnswer}
+                            correctAnswer={
+                                questions[currQuestion].correctAnswer
+                            }
+                            hasAnswered={hasAnswered}
                         />
                     )
                 )}
+                <button onClick={handleNext}>Next question</button>
             </StyledRowButton>
         </StyledQuestion>
     );
@@ -68,7 +92,6 @@ const StyledQuestion = styled.div`
 `;
 
 const StyledScoreBoard = styled.div`
-
     grid-area: score;
     align-self: center;
 `;
@@ -79,7 +102,7 @@ const ImgWrapper = styled.div`
     display: inline-block;
     overflow: hidden;
     width: 100%;
-    padding-bottom: 90%;
+    padding-bottom: 80%;
     height: 0;
     position: relative;
 `;

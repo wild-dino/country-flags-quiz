@@ -1,56 +1,61 @@
 import { useAppSelector } from "@/hooks/redux";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 interface ButtonProps {
     answer: string;
-    handleClick: (answer: string) => void;
-    isLoading: boolean;
+    handleClick: (answer: string, hasAnswered: boolean ) => void;
     correctAnswer: string;
+    hasAnswered: boolean;
 }
 
 interface StyledButonProps {
     active: boolean;
     correctAnswer: string;
     answer: string;
-    answered: boolean;
+    answered?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({
-    answer,
-    handleClick,
-    isLoading,
-    correctAnswer,
-}) => {
-    const [active, setActive] = useState(false);
-    const [answered, setAnswered] = useState(false);
+const initialState = {
+    active: false,
+    answered: false,
+};
 
-    console.log(active);
+const Button: FC<ButtonProps> = ({ answer, handleClick, correctAnswer, hasAnswered }) => {
+    const [{ active, answered}, setState] = useState(initialState);
 
-    if (isLoading) {
-        return <></>;
-    }
+    const clearState = () => {
+        setState({ ...initialState });
+    };
+
+    useEffect(() => {
+        clearState();
+    }, [handleClick]);
 
     const handleAnswer = () => {
-        setActive(true);
-        setAnswered(true);
-        handleClick(answer);
-
+        if (!answered) {
+            setState({ active: true, answered: true});
+            setTimeout(() => {
+                handleClick(answer, answered);
+            }, 1000);
+        }
     };
 
     return (
-        <StyledButton onClick={handleAnswer} active={active}
-        correctAnswer={correctAnswer}
-        answer={answer}
-        answered={answered}>
-              {answer}
+        <StyledButton
+            onClick={handleAnswer}
+            active={active}
+            correctAnswer={correctAnswer}
+            answer={answer}
+            answered={answered}
+        >
             <InnerButton
                 active={active}
                 correctAnswer={correctAnswer}
                 answer={answer}
                 answered={answered}
-            >
-            </InnerButton>
+            ></InnerButton>
+            {answer}
         </StyledButton>
     );
 };
@@ -58,17 +63,42 @@ const Button: FC<ButtonProps> = ({
 export default Button;
 
 const StyledButton = styled.button<StyledButonProps>`
-    z-index: 1;
+    min-height: 40px;
     position: relative;
-    width: 100%;
+    z-index: 1;
     min-width: 200px;
-    min-height: 30px;
     cursor: pointer;
-    transition: 0.3s all ease-in-out;
+    transition: 0.1s all ease-in-out;
     font-weight: bold;
     border-radius: 5px;
+    background: #b02bee;
     border: 0;
-    padding: 0;
+`;
+
+export const InnerButton = styled.div<any>`
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+    border-radius: 5px;
+    display: ${(props) => (props.answered ? "block" : "none")};
+    background: ${(props) =>
+        props.answer === props.correctAnswer
+            ? "linear-gradient(to right, #56ab2f, #a8e063)"
+            : "linear-gradient(90deg, #f41010,#ff2974)"};
+
+    animation: ${(props) =>
+        changeBackgroundAnimation(
+            props as {
+                active: boolean;
+                answer: string;
+                correctAnswer: string;
+                answered: boolean;
+            }
+        )};
 `;
 
 const changeBackground = keyframes`
@@ -76,29 +106,12 @@ const changeBackground = keyframes`
   100% { opacity: 1 };
 `;
 
-export const InnerButton = styled.div<StyledButonProps>`
-    display: ${(props) => props.answered ? "block" : "none"};
-    transform: translate3d(0, 0, 0);
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    width: 100%;
-    background: ${(props) =>
-       props.answer === props.correctAnswer? "linear-gradient(to right, #56ab2f, #a8e063)"
-            : "linear-gradient(to right, #ff512f, #dd2476)"};
-    animation: ${(props) =>
-        changeBackgroundAnimation(
-            props as { active: boolean; answer: string; correctAnswer: string; answered: boolean }
-        )};
-`;
-
 const changeBackgroundAnimation = ({
     active,
     answer,
     correctAnswer,
-    answered
 }: StyledButonProps) =>
     active &&
     css`
-        ${changeBackground} 1.38s cubic-bezier(0.36, 0.07, 0.19, 0.97) both
+        ${changeBackground} 500ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both
     `;

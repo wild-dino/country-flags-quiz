@@ -20,5 +20,5 @@ const StyledLayout = styled.div`
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: #090d2e;
+    background-color: #150632;
 `
