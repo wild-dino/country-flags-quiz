@@ -24,7 +24,9 @@ export const gameSlice = createSlice({
                 action.payload.isCorrect? state.score! += 10 : state.isCorrect = false;
         },
         resetQuiz: (state) => {
-            state = initialState;
+            state.gameStatus = "start";
+            state.isCorrect = false;
+            state.score = 0;
         },
     },
 });

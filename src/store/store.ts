@@ -4,7 +4,7 @@ import gameReducer from './reducers/quizSlice';
 
 const rootReducer = combineReducers({
     countries: countryReducer,
-    game: gameReducer
+    quiz: gameReducer
 });
 
 export const setupStore = () => {

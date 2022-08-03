@@ -17,7 +17,7 @@ const Question: FC = () => {
     const { updateQuiz, setQuizStatus } = useActions();
 
     const isLoading = useAppSelector((state) => state.countries.isLoading);
-    let { score } = useAppSelector((state) => state.game);
+    let { score } = useAppSelector((state) => state.quiz);
 
     const [currQuestion, setCurrQuestion] = useState(0);
     const [{ isCorrect, hasAnswered }, setState] = useState(initialState);

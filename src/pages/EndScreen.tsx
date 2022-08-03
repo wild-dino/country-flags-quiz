@@ -1,8 +1,11 @@
+import Rezult from '@/components/Rezult'
 import React from 'react'
 
 const EndScreen = () => {
   return (
-    <div>EndScreen</div>
+    <div>
+        <Rezult/>
+    </div>
   )
 }
 

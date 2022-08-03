@@ -4,7 +4,7 @@ import StartingPage from "./../pages/StartingPage";
 import { useAppSelector } from "@/hooks/redux";
 
 const Dashboard = () => {
-    const status = useAppSelector((state) => state.game.gameStatus);
+    const status = useAppSelector((state) => state.quiz.gameStatus);
     return (
         <>
             {status === "start" && <StartingPage />}
