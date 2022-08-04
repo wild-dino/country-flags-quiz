@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/country-flags-quiz/static/js/main.4d137131.js",
+    "static/media/Montserrat-Bold.woff": "/country-flags-quiz/static/media/Montserrat-Bold.8ce6f4ee86ac2cbc9b0f.woff",
+    "static/media/Montserrat-Regular.woff": "/country-flags-quiz/static/media/Montserrat-Regular.21e541a4a652a7fa0d6a.woff",
+    "index.html": "/country-flags-quiz/index.html",
+    "main.4d137131.js.map": "/country-flags-quiz/static/js/main.4d137131.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.4d137131.js"
+  ]
+}
