@@ -8,7 +8,7 @@
             "@/store/*": ["src/store/*"],
             "@/styles/*": ["src/styles/*"],
             "@/hooks/*": ["src/hooks/*"],
-            "@pages/*": ["src/pages/*"]
+            "@/pages/*": ["src/pages/*"]
         }
     }
 }

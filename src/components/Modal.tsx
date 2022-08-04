@@ -11,7 +11,6 @@ const Modal: FC<ModalProps> = ({
     hasAnswered,
     handleNext,
 }) => {
-    console.log(hasAnswered);
 
     const style = useSpring({
         delay: 500,
