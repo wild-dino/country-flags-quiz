@@ -20,8 +20,10 @@ export const gameSlice = createSlice({
             state.gameStatus = action.payload;
         },
         updateQuiz: (state, action: PayloadAction<QuizState>) => {
-                state.isCorrect = action.payload.isCorrect;
-                action.payload.isCorrect? state.score! += 10 : state.isCorrect = false;
+            state.isCorrect = action.payload.isCorrect;
+            action.payload.isCorrect
+                ? (state.score! += 10)
+                : (state.isCorrect = false);
         },
         resetQuiz: (state) => {
             state.gameStatus = "start";
