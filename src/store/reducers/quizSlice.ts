@@ -12,7 +12,7 @@ const initialState: QuizState = {
     isCorrect: false,
 };
 
-export const gameSlice = createSlice({
+export const quizSlice = createSlice({
     name: "quiz",
     initialState,
     reducers: {
@@ -33,6 +33,6 @@ export const gameSlice = createSlice({
     },
 });
 
-export const { setQuizStatus, updateQuiz, resetQuiz } = gameSlice.actions;
+export const { setQuizStatus, updateQuiz, resetQuiz } = quizSlice.actions;
 
-export default gameSlice.reducer;
+export default quizSlice.reducer;

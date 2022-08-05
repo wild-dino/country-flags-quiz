@@ -1,10 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import countryReducer from "./reducers/countrySlice";
-import gameReducer from './reducers/quizSlice';
+import quizReducer from './reducers/quizSlice';
 
 const rootReducer = combineReducers({
     countries: countryReducer,
-    quiz: gameReducer
+    quiz: quizReducer
 });
 
 export const setupStore = () => {
