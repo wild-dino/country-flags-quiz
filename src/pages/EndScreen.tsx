@@ -1,10 +1,9 @@
-import Rezult from '@/components/Rezult'
-import React from 'react'
+import Result from '@/components/Result'
 
 const EndScreen = () => {
   return (
     <div>
-        <Rezult/>
+        <Result/>
     </div>
   )
 }

@@ -1,9 +1,11 @@
 import { useAppSelector } from "@/hooks/redux";
 import { useActions } from "@/hooks/useActions";
 import styled from "styled-components";
+import { WrapperContainer, StyledImg } from "@/styles/globalStyle";
 import Button from "./Buttons/Button";
+import highFive from "@/assets/1x/endImg.png";
 
-const Rezult = () => {
+const Result = () => {
     let totalScore = useAppSelector((state) => state.quiz.score);
     const { resetQuiz } = useActions();
 
@@ -13,13 +15,16 @@ const Rezult = () => {
 
     return (
         <RezultStyled>
+            <WrapperContainer>
+                <StyledImg src={highFive} />
+            </WrapperContainer>
             <TotalScore> Your total score: {totalScore} </TotalScore>
             <Button onClick={handleReset}>Try again!</Button>
         </RezultStyled>
     );
 };
 
-export default Rezult;
+export default Result;
 
 const RezultStyled = styled.div`
     display: flex;

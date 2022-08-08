@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { MontserratBold, MontserratRegular } from "./fonts";
 
 export default createGlobalStyle`
@@ -24,6 +24,19 @@ export default createGlobalStyle`
     color: white;
     font-family: 'Montserrat';
   }
+`;
 
+export const WrapperContainer = styled.div`
+    overflow: hidden;
+    width: 70%;
+    padding-bottom: 60%;
+    height: 0;
+    position: relative;
+`;
 
-`
+export const StyledImg = styled.img`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: contain;
+`;

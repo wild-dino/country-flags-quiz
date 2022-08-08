@@ -1,19 +1,24 @@
-import React, { FC} from "react";
+import React, { FC } from "react";
 import { useActions } from "@/hooks/useActions";
 import Button from "./Buttons/Button";
 import styled from "styled-components";
+import { StyledImg, WrapperContainer } from "@/styles/globalStyle";
+import image from "@/assets/StartingPage/startImg.svg";
 
 const Greeting: FC = () => {
-    const {setQuizStatus} = useActions();
-   
+    const { setQuizStatus } = useActions();
+
     const statusHandler = () => {
-        setQuizStatus('quiz');
-    }
+        setQuizStatus("quiz");
+    };
 
     return (
         <StyledGreeting>
+            <WrapperContainer>
+                <StyledImg src={image} />
+            </WrapperContainer>
             <Caption>Welcome to the country flags quiz!</Caption>
-            <Button onClick={statusHandler} >Start</Button>
+            <Button onClick={statusHandler}>Start</Button>
         </StyledGreeting>
     );
 };
@@ -25,7 +30,7 @@ const StyledGreeting = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 10px 15px;
-`
+`;
 const Caption = styled.h1`
     font-size: 35px;
-`
+`;
