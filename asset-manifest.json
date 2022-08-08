@@ -1,12 +1,14 @@
 {
   "files": {
-    "main.js": "/country-flags-quiz/static/js/main.4d137131.js",
+    "main.js": "/country-flags-quiz/static/js/main.a4b0dae8.js",
     "static/media/Montserrat-Bold.woff": "/country-flags-quiz/static/media/Montserrat-Bold.8ce6f4ee86ac2cbc9b0f.woff",
     "static/media/Montserrat-Regular.woff": "/country-flags-quiz/static/media/Montserrat-Regular.21e541a4a652a7fa0d6a.woff",
+    "static/media/startImg.svg": "/country-flags-quiz/static/media/startImg.b968732dc12af5bcae6d198594978c1c.svg",
+    "static/media/endImg.png": "/country-flags-quiz/static/media/endImg.a8ab41b280a4bd47c289.png",
     "index.html": "/country-flags-quiz/index.html",
-    "main.4d137131.js.map": "/country-flags-quiz/static/js/main.4d137131.js.map"
+    "main.a4b0dae8.js.map": "/country-flags-quiz/static/js/main.a4b0dae8.js.map"
   },
   "entrypoints": [
-    "static/js/main.4d137131.js"
+    "static/js/main.a4b0dae8.js"
   ]
 }
