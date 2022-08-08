@@ -3,7 +3,7 @@ import { useActions } from "@/hooks/useActions";
 import styled from "styled-components";
 import { WrapperContainer, StyledImg } from "@/styles/globalStyle";
 import Button from "./Buttons/Button";
-import highFive from "@/assets/1x/endImg.png";
+import highFive from "@/assets/EndScreen/endImg.png";
 
 const Result = () => {
     let totalScore = useAppSelector((state) => state.quiz.score);
